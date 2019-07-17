@@ -6,7 +6,7 @@ import "./form.css";
 
 window.axios = axios;
 
-function SignUpForm({ isSubmitting }) {
+function SignUpForm({ isSubmitting, values }) {
     console.log(isSubmitting);
     return (
         <Form className="login-form">
@@ -43,7 +43,7 @@ function SignUpForm({ isSubmitting }) {
                 type='checkbox'
                 id='check'
                 name='Check'
-                required
+                checked={values.check}
             />
         </div>
         <button className="submit-button" >
@@ -60,7 +60,7 @@ export default withFormik({
             Name: '',
             Email: '',
             Password: '',
-            Check: ''
+            Check: false
         };
     },
     handleSubmit: (values, formikBag) => {
@@ -97,5 +97,7 @@ export default withFormik({
                 )
                 .max(12)
                 .required(),
+        Check:  Yup.boolean()
+        .oneOf([true])
     })
 })(SignUpForm);

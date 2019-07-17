@@ -39,6 +39,10 @@
     border-color: #e57373;
 }
 
+.form-group checkbox{
+
+}
+
 .submit-button {
     display: inline-block;
     padding: 10px 14px;
