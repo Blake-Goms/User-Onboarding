@@ -6,10 +6,8 @@ import "./form.css";
 
 window.axios = axios;
 
-function SignUpForm({ errors, touched, isSubmitting }) {
-    // console.log(errors);
+function SignUpForm({ isSubmitting }) {
     console.log(isSubmitting);
-    // console.log(touched);
     return (
         <Form className="login-form">
         <div className="form-group">
@@ -19,11 +17,7 @@ function SignUpForm({ errors, touched, isSubmitting }) {
                 type="text"
                 id="name"
                 name="Name"
-                className={errors.Name ? "invalid" : ""}
             />
-            <p className="error-text">
-                {touched.Name && errors.Name}
-            </p>
         </div>
         <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -32,11 +26,7 @@ function SignUpForm({ errors, touched, isSubmitting }) {
                 type="email"
                 id="email"
                 name="Email"
-                className={errors.Email ? "invalid" : ""}
             />
-            <p className="error-text">
-                {touched.Email && errors.Email}
-            </p>
         </div>
         <div className="form-group">
             <label htmlFor="password">Password</label>
@@ -45,11 +35,7 @@ function SignUpForm({ errors, touched, isSubmitting }) {
                 type="password"
                 id="password"
                 name="Password"
-                className={errors.Password ? "invalid" : ""}
             />
-            <p className="error-text">
-                {touched.Password && errors.Password}
-            </p>
         </div>
         <div className='form-group checkbox'>
             <label htmlFor='checkbox'> I have Read the Terms of Service</label>
@@ -57,14 +43,11 @@ function SignUpForm({ errors, touched, isSubmitting }) {
                 type='checkbox'
                 id='check'
                 name='Check'
-                className={errors.Check ? "This is required!" : ''}
+                required
             />
-            <p className="error-text">
-                {touched.Check && errors.Check}
-            </p>
         </div>
-            {isSubmitting && <p>Submitting Data...</p>}
-        <button className="submit-button" disabled={isSubmitting}>
+        <button className="submit-button" >
+            {/* &arr is a an arrow pointing right! So Cool! */}
             Submit &rarr;
         </button>
         </Form>
@@ -88,7 +71,7 @@ export default withFormik({
             .then(res => {
                 console.log(res.data);
                 window.alert(
-                    'Form Subumitted \n' +
+                    'Form Submitted \n' +
                     'Name: ' + res.data.Name + '\n' +
                     'Email: ' + res.data.Email + '\n' +
                     'Your Password was securely stored! \n' +
@@ -114,7 +97,5 @@ export default withFormik({
                 )
                 .max(12)
                 .required(),
-        Check: Yup.boolean()
-        .required(),
     })
 })(SignUpForm);
